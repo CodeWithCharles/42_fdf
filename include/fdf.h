@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/06 16:48:43 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:29:01 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ extern char	*g_pname;
 # define RET_ERR					1
 # define RET_OK						0
 
+# define WIDTH						1024
+# define HEIGHT						1024
+
+# ifndef ENDIANESS
+#  define ENDIANESS					0
+# endif
 // Structures
 
 // 2D Vector
@@ -126,6 +132,12 @@ typedef struct s_fdf
 
 // Error handling
 
-void	print_gen_error(const char *error);
+void		print_gen_error(const char *error);
+
+// Color functions
+
+uint32_t	get_color_from_str(char *str);
+uint32_t	rgba_to_uint32_t(int r, int g, int b, int a);
+t_color		rgba_to_color(uint32_t rgba);
 
 #endif

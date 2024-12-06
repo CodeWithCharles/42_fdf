@@ -1,2 +1,2 @@
 FILES	=																	\
-	fdf_error main															\
+	color/color fdf_error main												\
