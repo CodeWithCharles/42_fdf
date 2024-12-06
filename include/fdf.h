@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/06 16:18:21 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:48:43 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,87 @@ extern char	*g_pname;
 # define RET_ERR					1
 # define RET_OK						0
 
+// Structures
+
+// 2D Vector
+
+typedef struct s_2d_vector
+{
+	int	x;
+	int	y;
+}	t_2d_vector;
+
+// 3D Vector
+
+typedef struct s_3d_vector
+{
+	double		x;
+	double		y;
+	double		z;
+	uint32_t	color;
+}	t_3d_vector;
+
+// Color
+
+typedef struct s_color
+{
+	uint32_t	r;
+	uint32_t	g;
+	uint32_t	b;
+	uint32_t	a;
+}	t_color;
+
+// Map Borders
+
+typedef struct s_map_borders
+{
+	t_2d_vector	min;
+	t_2d_vector	max;
+}	t_map_borders;
+
+// Map element
+
+typedef struct s_map_element
+{
+	int			x;
+	int			y;
+	int			z;
+	int			original_depth;
+	uint32_t	color;
+}	t_map_element;
+
+// Offset
+
+typedef struct s_offset
+{
+	int	x;
+	int	y;
+}	t_offset;
+
+// Camera
+
+typedef struct s_camera
+{
+	t_offset	offset;
+	double		x_deg;
+	double		y_deg;
+	double		z_deg;
+	double		fov;
+}	t_camera;
+
+// Fdf
+
+typedef struct s_fdf
+{
+	t_map_element	**map;
+	double			scale;
+	t_camera		camera;
+}	t_fdf;
+
 // Functions
 
 // Error handling
 
 void	print_gen_error(const char *error);
-
 
 #endif
