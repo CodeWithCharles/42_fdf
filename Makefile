@@ -6,7 +6,7 @@
 #    By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 16:33:26 by cpoulain          #+#    #+#              #
-#    Updated: 2024/12/05 17:19:44 by cpoulain         ###   ########.fr        #
+#    Updated: 2024/12/06 16:18:53 by cpoulain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ LIBFT_GIT		:=	https://github.com/CodeWithCharles/42_libft_full.git
 
 # Targets
 
-TARGET			:=	pipex
+TARGET			:=	fdf
 THDPTY_LIBFT_H	:=	$(INC_DIR)/$(LIBFT_INC_H)
 
 # Compiler
@@ -46,12 +46,8 @@ CFLAGS			:=	-Wall -Wextra -Werror -g
 
 # Files definition
 
-MAIN_FILE		:=	pipex
-CORE_FILES		:=	$(filter-out $(MAIN_FILE), $(FILES))
-
 # Objs formatter
 
-CORE_OBJS		=	$(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(CORE_FILES)))
 OBJS			=	$(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(FILES)))
 
 # Terminal colors
@@ -72,7 +68,7 @@ TERM_CLEAR_LINE	:=	\033[2K\r
 # Flags
 
 OBJ_HEADER_FLAG	:=	.obj_header_done
-
+HEADER_FLAG		:=	.header_done
 # Phony rules
 
 all: $(TARGET)
@@ -132,8 +128,13 @@ $(TARGET): $(THDPTY_LIBFT_H) $(OBJS)
 	@$(CC) $(OBJS) -I$(INC_DIR) $(LIBFT_TARGET) -o $@ $(CFLAGS)
 	@printf "$(TERM_CLEAR_LINE)$(TERM_GREEN)Done building executable $(TERM_BLUE)\"%s\"$(TERM_GREEN) !\n$(TERM_RESET)" $@
 	@$(RM) $(OBJ_HEADER_FLAG)
+	@$(RM) $(HEADER_FLAG)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@if [ ! -f $(HEADER_FLAG) ]; then \
+		$(MAKE) _header; \
+		touch $(HEADER_FLAG); \
+	fi
 	@if [ ! -f $(OBJ_HEADER_FLAG) ]; then \
 		$(MAKE) _obj_header; \
 		touch $(OBJ_HEADER_FLAG); \
