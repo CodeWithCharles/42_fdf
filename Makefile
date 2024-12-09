@@ -6,7 +6,7 @@
 #    By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 16:33:26 by cpoulain          #+#    #+#              #
-#    Updated: 2024/12/06 16:18:53 by cpoulain         ###   ########.fr        #
+#    Updated: 2024/12/09 14:57:48 by cpoulain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,17 +27,33 @@ OBJ_DIR			:=	build
 
 # Third party
 
-THIRD_PARTY_LIB	:=	third_party
+THIRD_PARTY_DIR	:=	third_party
+
+# LIBFT
+
 LIBFT_DIR		:=	42_libft_full
-LIBFT_PATH		:=	$(THIRD_PARTY_LIB)/$(LIBFT_DIR)
+LIBFT_PATH		:=	$(THIRD_PARTY_DIR)/$(LIBFT_DIR)
 LIBFT_INC_H		:=	libft.h
 LIBFT_TARGET	:=	libftfull.a
 LIBFT_GIT		:=	https://github.com/CodeWithCharles/42_libft_full.git
+
+# MiniLibX
+
+MLX_DIR			:=	minilibx-linux
+MLX_PATH		:=	$(THIRD_PARTY_DIR)/$(MLX_DIR)
+MLX_INC_H		:=	mlx.h
+MLX_TARGET		:=	libmlx.a
+MLX_GIT			:=	https://github.com/42Paris/minilibx-linux.git
+
+# Common
+
+THDPTY_TARGETS	:=	$(LIBFT_TARGET) $(MLX_TARGET)
 
 # Targets
 
 TARGET			:=	fdf
 THDPTY_LIBFT_H	:=	$(INC_DIR)/$(LIBFT_INC_H)
+THDPTY_MLX_H	:=	$(INC_DIR)/$(MLX_INC_H)
 
 # Compiler
 
@@ -93,9 +109,18 @@ fclean: clean
 		printf "$(TERM_YELLOW)Removing \"%s\"...\n$(TERM_RESET)" $(LIBFT_TARGET); \
 		$(RM) $(LIBFT_TARGET);\
 	fi
+	@if [ -e $(INC_DIR)/$(MLX_INC_H) ]; then \
+		printf "$(TERM_YELLOW)Removing \"%s\"...\n$(TERM_RESET)" $(INC_DIR)/$(MLX_INC_H); \
+		$(RM) $(THDPTY_MLX_H);\
+	fi
+	@if [ -e $(MLX_TARGET) ]; then \
+		printf "$(TERM_YELLOW)Removing \"%s\"...\n$(TERM_RESET)" $(MLX_TARGET); \
+		$(RM) $(MLX_TARGET);\
+	fi
 
 cleanlibs:
 	@$(MAKE) clean -C $(LIBFT_PATH)
+	@$(MAKE) clean -C $(MLX_PATH)
 
 tests: $(TEST_TARGET)
 
@@ -103,6 +128,8 @@ fcleanlibs:
 	@$(MAKE) fclean -C $(LIBFT_PATH)
 	@$(RM) $(LIBFT_TARGET)
 	@$(RM) $(THDPTY_LIBFT_H)
+	@$(RM) $(MLX_TARGET)
+	@$(RM) $(THDPTY_MLX_H)
 
 re: fclean all
 
@@ -122,7 +149,7 @@ _obj_footer:
 
 # Binary / Lib generation
 
-$(TARGET): $(THDPTY_LIBFT_H) $(OBJS)
+$(TARGET): $(THDPTY_TARGETS) $(OBJS)
 	@$(MAKE) _obj_footer
 	@printf "$(TERM_MAGENTA)Making executable $(TERM_BLUE)\"%s\"$(TERM_MAGENTA)...$(TERM_RESET)" $@
 	@$(CC) $(OBJS) -I$(INC_DIR) $(LIBFT_TARGET) -o $@ $(CFLAGS)
@@ -146,8 +173,17 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 # Third party compilation
 
-$(THDPTY_LIBFT_H): $(LIBFT_TARGET)
-	@cp -u $(LIBFT_PATH)/$(LIBFT_INC_H) $@
+
+$(MLX_TARGET):
+	@if [ ! -d "$(MLX_PATH)/.git" ]; then \
+		printf "$(TERM_YELLOW)Cloning third party library \"%s\" in \"%s\"...\n$(TERM_RESET)" $(MLX_GIT) $(MLX_PATH);\
+		git clone $(MLX_GIT) $(MLX_PATH);\
+	fi
+	@printf "$(TERM_MAGENTA)Making archive $(TERM_BLUE)\"%s\"$(TERM_MAGENTA)...$(TERM_RESET)" $@
+	@$(MAKE) -C $(MLX_PATH)
+	@cp $(MLX_PATH)/$@ ./
+	@cp -u $(MLX_PATH)/$(MLX_INC_H) $(INC_DIR)/
+	@printf "$(TERM_CLEAR_LINE)$(TERM_GREEN)Done copying archive $(TERM_BLUE)\"%s\"$(TERM_GREEN) !\n$(TERM_RESET)" $@
 
 $(LIBFT_TARGET):
 	@if [ ! -d "$(LIBFT_PATH)/.git" ]; then \
@@ -156,7 +192,8 @@ $(LIBFT_TARGET):
 	fi
 	@printf "$(TERM_MAGENTA)Making archive $(TERM_BLUE)\"%s\"$(TERM_MAGENTA)...$(TERM_RESET)" $@
 	@$(MAKE) -C $(LIBFT_PATH)
-	@cp $(LIBFT_PATH)/$(LIBFT_TARGET) ./ 
+	@cp $(LIBFT_PATH)/$@ ./
+	@cp -u $(LIBFT_PATH)/$(LIBFT_INC_H) $(INC_DIR)/
 	@printf "$(TERM_CLEAR_LINE)$(TERM_GREEN)Done copying archive $(TERM_BLUE)\"%s\"$(TERM_GREEN) !\n$(TERM_RESET)" $@
 
 .PHONY: all clean fclean re norminette _header _obj_footer _obj_header cleanlibs fcleanlibs tests _obj_test_footer

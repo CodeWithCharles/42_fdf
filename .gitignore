@@ -2,3 +2,6 @@ build/
 libftfull.a
 include/libft.h
 fdf
+include/mlx.h
+libmlx.a
+third_party/minilibx-linux/obj/
