@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/06 17:29:01 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/09 17:01:13 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 // Includes
 
 # include "libft.h"
+# include <fcntl.h>
+
+# define BUFFER_SIZE				10
 
 // Terminal colors
 
@@ -39,6 +42,8 @@ extern char	*g_pname;
 // Errors
 
 # define ERROR_BAD_ARG_NUM			"%s%s:\tBad number of argument.\n%s"
+# define ERROR_BAD_FILE_NAME		"%s%s:\tIncorrect file name.\n%s"
+# define ERROR_OPEN_FILE			"%s%s:\tCould not open %s.\n%s"
 
 // Utils define
 
@@ -51,6 +56,11 @@ extern char	*g_pname;
 # ifndef ENDIANESS
 #  define ENDIANESS					0
 # endif
+
+# ifndef FILE_EXT
+#  define FILE_EXT					".fdf"
+# endif
+
 // Structures
 
 // 2D Vector
@@ -132,12 +142,26 @@ typedef struct s_fdf
 
 // Error handling
 
-void		print_gen_error(const char *error);
+void			print_gen_error(const char *error);
+void			print_arged_error(const char *error, const char *arg);
 
 // Color functions
 
-uint32_t	get_color_from_str(char *str);
-uint32_t	rgba_to_uint32_t(int r, int g, int b, int a);
-t_color		rgba_to_color(uint32_t rgba);
+uint32_t		get_color_from_str(char *str);
+uint32_t		rgba_to_uint32_t(int r, int g, int b, int a);
+t_color			rgba_to_color(uint32_t rgba);
+
+// Initializing
+
+int				ft_init_fdf(int argc, char **argv, t_fdf *fdf);
+
+// File handling
+
+int				ft_validate_file_name(char *file_name);
+
+// Map parsing
+
+char			**ft_read_map_to_strs(const int map_fd);
+t_map_element	**ft_get_map(char	*file_path);
 
 #endif

@@ -1,2 +1,3 @@
 FILES	=																	\
-	color/color fdf_error main												\
+	color/color error/error init/init main map/file_validator				\
+	map/map_parsing															\

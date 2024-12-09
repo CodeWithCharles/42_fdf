@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 16:11:19 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/09 17:10:26 by cpoulain         ###   ########.fr       */
+/*   Created: 2024/12/09 15:22:08 by cpoulain          #+#    #+#             */
+/*   Updated: 2024/12/09 15:52:53 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-char	*g_pname;
-
-int	main(int argc, char **argv)
+int	ft_init_fdf(int argc, char **argv, t_fdf *fdf)
 {
-	t_fdf	fdf;
-
-	fdf = (t_fdf){};
-	g_pname = argv[0];
-	if (ft_init_fdf(argc, argv, &fdf) != RET_OK)
-		return (RET_ERR);
+	if (argc != 2)
+		return (print_gen_error(ERROR_BAD_ARG_NUM), RET_ERR);
+	if (ft_validate_file_name(argv[1]) != RET_OK)
+		return (print_gen_error(ERROR_BAD_FILE_NAME), RET_ERR);
+	(void)fdf;
 	return (RET_OK);
 }
