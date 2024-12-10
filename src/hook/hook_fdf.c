@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:01:03 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 17:48:59 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:57:34 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,23 @@ int	ft_hook(
 	t_fdf *fdf
 )
 {
-	if (keysym == XK_Escape)
+	if (keysym == XK_1)
+		fdf->projection_mode = PROJ_MODE_ORTHO;
+	else if (keysym == XK_2)
+		fdf->projection_mode = PROJ_MODE_PARALLEL;
+	else if (keysym == XK_3)
+		fdf->projection_mode = PROJ_MODE_ANGULAR;
+	else if (keysym == XK_Escape)
 	{
 		ft_printf("%s%s:\tThe %d key (ESC) has been pressed.\n%s",
 			TERM_RED, g_pname, keysym, TERM_RESET);
 		free_fdf(fdf);
 		exit(0);
 	}
-	ft_hook_update_camera(keysym, fdf);
+	else
+		ft_hook_update_camera(keysym, fdf);
 	ft_refresh_image(fdf);
+	printf("Projection mode : %c\n", fdf->projection_mode);
 	return (0);
 }
 
@@ -62,9 +70,6 @@ void	ft_hook_update_camera(
 
 void	ft_refresh_image(t_fdf *fdf)
 {
-	for (int y = 0; y < HEIGHT; ++y)
-		for (int x = 0; x < WIDTH; ++x)
-			ft_put_pixel(&fdf->mlx_data.img_data, x, y, 0xff);
 	mlx_put_image_to_window(fdf->mlx_data.mlx, fdf->mlx_data.window,
 		fdf->mlx_data.img_data.img, 0, 0);
 }

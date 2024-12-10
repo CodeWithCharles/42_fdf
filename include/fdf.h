@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 17:49:32 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:58:29 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,10 @@ extern char	*g_pname;
 # ifndef FILE_EXT
 #  define FILE_EXT					".fdf"
 # endif
+
+# define PROJ_MODE_ORTHO			'O'
+# define PROJ_MODE_PARALLEL			'P'
+# define PROJ_MODE_ANGULAR			'A'
 
 // Mouse control for hooks
 
@@ -177,6 +181,7 @@ typedef struct s_fdf
 	double			scale;
 	t_camera		camera;
 	t_mlx_data		mlx_data;
+	char			projection_mode;
 }	t_fdf;
 
 // Functions
