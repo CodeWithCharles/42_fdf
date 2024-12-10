@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 12:41:11 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:48:36 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // Includes
 
 # include "libft.h"
+# include "mlx.h"
 # include <fcntl.h>
 
 # define BUFFER_SIZE				10
@@ -44,6 +45,9 @@ extern char	*g_pname;
 # define ERROR_BAD_ARG_NUM			"%s%s:\tBad number of argument.\n%s"
 # define ERROR_BAD_FILE_NAME		"%s%s:\tIncorrect file name.\n%s"
 # define ERROR_OPEN_FILE			"%s%s:\tCould not open %s.\n%s"
+# define ERROR_PARSING_MAP			"%s%s:\tError while parsing map.\n%s"
+# define ERROR_INIT_MLX				"%s%s:\tError initializing mlx.\n%s"
+# define ERROR_CREATING_WINDOW		"%s%s:\tError creating new mlx window.\n%s"
 
 // Utils define
 
@@ -137,6 +141,8 @@ typedef struct s_fdf
 	t_map_element	**map;
 	double			scale;
 	t_camera		camera;
+	void			*mlx;
+	void			*window;
 }	t_fdf;
 
 // Functions
@@ -151,6 +157,8 @@ void			print_arged_error(
 					const char *error,
 					const char *arg
 					);
+
+void			print_mlx_error(void);
 
 // Color functions
 
@@ -201,6 +209,12 @@ void			ft_free_2d_map_elements(
 					t_map_element ***map
 					);
 
+// Structure utils
+
+void			free_fdf(
+					t_fdf	*fdf
+					);
+
 // File handling
 
 int				ft_validate_file_name(
@@ -217,7 +231,7 @@ char			***ft_map_strs_to_split(
 					char **map_strs
 					);
 
-t_map_element	**ft_alloc_map_elems_from_3d_array(
+t_map_element	**ft_map_elems_from_3d_array(
 					char ***map_strs_elements
 					);
 

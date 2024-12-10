@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:13:44 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 12:13:25 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:20:31 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@ uint32_t	get_color_from_str(
 )
 {
 	t_color			color;
-	const size_t	str_len = ft_strlen(str + 2);
 
 	if (str && str + 2)
 	{
 		color = rgba_to_color(ft_atoi_base(str + 2, 16));
-		if (str_len > 0 && str_len < 7)
+		if (ft_strlen(str + 2) > 0 && ft_strlen(str + 2) < 7)
 			color.a = 0xFF;
 		return (rgba_to_uint32_t(color.r, color.g, color.b, color.a));
 	}

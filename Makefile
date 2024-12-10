@@ -6,7 +6,7 @@
 #    By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 16:33:26 by cpoulain          #+#    #+#              #
-#    Updated: 2024/12/09 14:57:48 by cpoulain         ###   ########.fr        #
+#    Updated: 2024/12/10 14:22:18 by cpoulain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ THDPTY_MLX_H	:=	$(INC_DIR)/$(MLX_INC_H)
 
 CC				:=	cc
 CFLAGS			:=	-Wall -Wextra -Werror -g
-
+LIBFLAGS		:=	-L/usr/lib -lX11 -lXext -lXrandr -lXi -lXinerama -lXcursor
 # Files definition
 
 # Objs formatter
@@ -152,7 +152,7 @@ _obj_footer:
 $(TARGET): $(THDPTY_TARGETS) $(OBJS)
 	@$(MAKE) _obj_footer
 	@printf "$(TERM_MAGENTA)Making executable $(TERM_BLUE)\"%s\"$(TERM_MAGENTA)...$(TERM_RESET)" $@
-	@$(CC) $(OBJS) -I$(INC_DIR) $(LIBFT_TARGET) -o $@ $(CFLAGS)
+	@$(CC) $(OBJS) -I$(INC_DIR) $(LIBFT_TARGET) $(MLX_TARGET) -o $@ $(CFLAGS) $(LIBFLAGS)
 	@printf "$(TERM_CLEAR_LINE)$(TERM_GREEN)Done building executable $(TERM_BLUE)\"%s\"$(TERM_GREEN) !\n$(TERM_RESET)" $@
 	@$(RM) $(OBJ_HEADER_FLAG)
 	@$(RM) $(HEADER_FLAG)

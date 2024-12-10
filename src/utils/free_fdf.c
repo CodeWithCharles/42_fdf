@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_fdf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 16:11:19 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 14:48:53 by cpoulain         ###   ########.fr       */
+/*   Created: 2024/12/10 14:43:11 by cpoulain          #+#    #+#             */
+/*   Updated: 2024/12/10 14:48:45 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-char	*g_pname;
-
-int	main(
-	int argc,
-	char **argv
+void	free_fdf(
+	t_fdf	*fdf
 )
 {
-	t_fdf	fdf;
-
-	fdf = (t_fdf){};
-	g_pname = argv[0];
-	if (ft_init_fdf(argc, argv, &fdf) != RET_OK)
-		return (free_fdf(&fdf), RET_ERR);
-	free_fdf(&fdf);
-	return (RET_OK);
+	if (fdf->map)
+		ft_free_2d_map_elements(&(fdf->map));
+	if (fdf->mlx)
+	{
+		if (fdf->window)
+			mlx_destroy_window(fdf->mlx, fdf->window);
+		mlx_destroy_display(fdf->mlx);
+		free(fdf->mlx);
+	}
 }
