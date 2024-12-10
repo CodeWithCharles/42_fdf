@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 14:48:36 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:15:59 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include "libft.h"
 # include "mlx.h"
+# include <X11/keysym.h>
 # include <fcntl.h>
 
 # define BUFFER_SIZE				10
@@ -134,6 +135,14 @@ typedef struct s_camera
 	double		fov;
 }	t_camera;
 
+// Mlx data
+
+typedef struct s_mlx_data
+{
+	void	*mlx;
+	void	*window;
+}	t_mlx_data;
+
 // Fdf
 
 typedef struct s_fdf
@@ -141,8 +150,7 @@ typedef struct s_fdf
 	t_map_element	**map;
 	double			scale;
 	t_camera		camera;
-	void			*mlx;
-	void			*window;
+	t_mlx_data		mlx_data;
 }	t_fdf;
 
 // Functions
@@ -242,6 +250,13 @@ t_map_element	**ft_parse_2d_map_element_from_strs(
 
 t_map_element	**ft_get_map(
 					char *file_path
+					);
+
+// Hooking
+
+int				ft_hook(
+					int keysym,
+					t_fdf *data
 					);
 
 #endif

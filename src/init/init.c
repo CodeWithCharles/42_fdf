@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:22:08 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 14:30:34 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:16:10 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ int	ft_init_fdf(
 	fdf->map = ft_get_map(argv[1]);
 	if (!fdf->map)
 		return (print_gen_error(ERROR_PARSING_MAP), RET_ERR);
-	fdf->mlx = mlx_init();
-	if (!fdf->mlx)
+	fdf->mlx_data.mlx = mlx_init();
+	if (!fdf->mlx_data.mlx)
 		return (print_gen_error(ERROR_INIT_MLX), RET_ERR);
-	fdf->window = mlx_new_window(fdf->mlx, HEIGHT, WIDTH, "Fil de Fer");
-	if (!fdf->window)
+	fdf->mlx_data.window = mlx_new_window(
+			fdf->mlx_data.mlx, HEIGHT, WIDTH, "Fil de Fer");
+	if (!fdf->mlx_data.window)
 		return (print_gen_error(ERROR_CREATING_WINDOW), RET_ERR);
+	mlx_key_hook(fdf->mlx_data.window, ft_hook, fdf);
 	return (RET_OK);
 }

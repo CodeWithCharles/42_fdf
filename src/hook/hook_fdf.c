@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_fdf.c                                         :+:      :+:    :+:   */
+/*   hook_fdf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 14:43:11 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 14:59:33 by cpoulain         ###   ########.fr       */
+/*   Created: 2024/12/10 15:01:03 by cpoulain          #+#    #+#             */
+/*   Updated: 2024/12/10 15:16:28 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	free_fdf(
-	t_fdf	*fdf
+int	ft_hook(
+	int keysym,
+	t_fdf *fdf
 )
 {
-	if (fdf->map)
-		ft_free_2d_map_elements(&(fdf->map));
-	if (fdf->mlx_data.mlx)
+	if (keysym == XK_Escape)
 	{
-		if (fdf->mlx_data.window)
-			mlx_destroy_window(fdf->mlx_data.mlx, fdf->mlx_data.window);
-		mlx_destroy_display(fdf->mlx_data.mlx);
-		free(fdf->mlx_data.mlx);
+		ft_printf("%s%s:\tThe %d key (ESC) has been pressed.\n%s",
+			TERM_RED, g_pname, keysym, TERM_RESET);
+		free_fdf(fdf);
+		exit(0);
 	}
+	ft_printf("%s%s:\tThe %d key has been pressed.\n%s",
+		TERM_GREEN, g_pname, keysym, TERM_RESET);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:11:19 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 14:48:53 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:10:50 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(
 	g_pname = argv[0];
 	if (ft_init_fdf(argc, argv, &fdf) != RET_OK)
 		return (free_fdf(&fdf), RET_ERR);
+	mlx_loop(fdf.mlx_data.mlx);
 	free_fdf(&fdf);
 	return (RET_OK);
 }
