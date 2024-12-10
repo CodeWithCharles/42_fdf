@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 15:15:59 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:57:21 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,20 @@ extern char	*g_pname;
 
 // Utils define
 
+# ifndef DEBUG_MODE
+#  define DEBUG_MODE				0
+# endif
+
 # define RET_ERR					1
 # define RET_OK						0
 
 # define WIDTH						1024
 # define HEIGHT						1024
+
+# define FDF_MIN_SCALE				2
+# define FDF_MAX_SCALE				1000
+# define FDF_SCALE_INCREMENT		1
+# define CAM_DEG_INCREMENT			.01
 
 # ifndef ENDIANESS
 #  define ENDIANESS					0
@@ -65,6 +74,11 @@ extern char	*g_pname;
 # ifndef FILE_EXT
 #  define FILE_EXT					".fdf"
 # endif
+
+// Mouse control for hooks
+
+# define MOUSE_SCROLL_UP			4
+# define MOUSE_SCROLL_DOWN			5
 
 // Structures
 
@@ -257,6 +271,26 @@ t_map_element	**ft_get_map(
 int				ft_hook(
 					int keysym,
 					t_fdf *data
+					);
+
+void			ft_hook_update_camera(
+					int keysym,
+					t_fdf *fdf
+					);
+
+int				ft_mouse_hook(
+					int keysym,
+					int x,
+					int y,
+					t_fdf *fdf
+					);
+
+void			ft_start_hook(
+					t_fdf *fdf
+					);
+
+int				ft_refresh_loop(
+					t_fdf *fdf
 					);
 
 #endif

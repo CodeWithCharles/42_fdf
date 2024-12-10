@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:22:08 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 15:16:10 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:01:43 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ int	ft_init_fdf(
 			fdf->mlx_data.mlx, HEIGHT, WIDTH, "Fil de Fer");
 	if (!fdf->mlx_data.window)
 		return (print_gen_error(ERROR_CREATING_WINDOW), RET_ERR);
-	mlx_key_hook(fdf->mlx_data.window, ft_hook, fdf);
 	return (RET_OK);
 }
