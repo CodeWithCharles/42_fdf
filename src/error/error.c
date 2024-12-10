@@ -6,13 +6,15 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:13:03 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/09 15:38:30 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:12:59 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	print_gen_error(const char *error)
+void	print_gen_error(
+	const char *error
+)
 {
 	fd_printf(STDERR_FILENO, error,
 		TERM_RED,
@@ -21,7 +23,10 @@ void	print_gen_error(const char *error)
 		);
 }
 
-void	print_arged_error(const char *error, const char *arg)
+void	print_arged_error(
+	const char *error,
+	const char *arg
+)
 {
 	fd_printf(STDERR_FILENO, error,
 		TERM_RED,

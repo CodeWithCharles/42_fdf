@@ -6,13 +6,17 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:22:08 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/09 15:52:53 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:12:44 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	ft_init_fdf(int argc, char **argv, t_fdf *fdf)
+int	ft_init_fdf(
+	int argc,
+	char **argv,
+	t_fdf *fdf
+)
 {
 	if (argc != 2)
 		return (print_gen_error(ERROR_BAD_ARG_NUM), RET_ERR);

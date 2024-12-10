@@ -6,13 +6,15 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:23:52 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/09 15:53:22 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:12:32 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	ft_validate_file_name(char *file_name)
+int	ft_validate_file_name(
+	char *file_name
+)
 {
 	size_t	file_name_len;
 

@@ -6,14 +6,16 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:13:44 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/06 17:30:14 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:13:25 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
 
-uint32_t	get_color_from_str(char *str)
+uint32_t	get_color_from_str(
+	char *str
+)
 {
 	t_color			color;
 	const size_t	str_len = ft_strlen(str + 2);
@@ -28,14 +30,21 @@ uint32_t	get_color_from_str(char *str)
 	return (rgba_to_uint32_t(0xFF, 0xFF, 0xFF, 0xFF));
 }
 
-uint32_t	rgba_to_uint32_t(int r, int g, int b, int a)
+uint32_t	rgba_to_uint32_t(
+	int r,
+	int g,
+	int b,
+	int a
+)
 {
 	if (ENDIANESS == 0)
 		return (a << 24 | b << 16 | g << 8 | r);
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-t_color	rgba_to_color(uint32_t rgba)
+t_color	rgba_to_color(
+	uint32_t rgba
+)
 {
 	t_color	color;
 

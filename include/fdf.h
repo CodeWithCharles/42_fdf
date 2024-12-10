@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/09 17:01:13 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:20:26 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,26 +142,91 @@ typedef struct s_fdf
 
 // Error handling
 
-void			print_gen_error(const char *error);
-void			print_arged_error(const char *error, const char *arg);
+void			print_gen_error(
+					const char *error
+					);
+
+void			print_arged_error(
+					const char *error,
+					const char *arg
+					);
 
 // Color functions
 
-uint32_t		get_color_from_str(char *str);
-uint32_t		rgba_to_uint32_t(int r, int g, int b, int a);
-t_color			rgba_to_color(uint32_t rgba);
+uint32_t		get_color_from_str(
+					char *str
+					);
+
+uint32_t		rgba_to_uint32_t(
+					int r,
+					int g,
+					int b,
+					int a
+					);
+
+t_color			rgba_to_color(
+					uint32_t rgba
+					);
 
 // Initializing
 
-int				ft_init_fdf(int argc, char **argv, t_fdf *fdf);
+int				ft_init_fdf(
+					int argc,
+					char **argv,
+					t_fdf *fdf
+					);
+
+// Array utils
+
+size_t			ft_len_2d_array(
+					const char **array
+					);
+
+size_t			ft_len_3d_array(
+					const char ***array
+					);
+
+void			ft_free_2d_array(
+					char ***array
+					);
+
+void			ft_free_3d_array(
+					char ****array
+					);
+
+// Map elements utils
+
+void			ft_free_2d_map_elements(
+					t_map_element ***map
+					);
 
 // File handling
 
-int				ft_validate_file_name(char *file_name);
+int				ft_validate_file_name(
+					char *file_name
+					);
 
 // Map parsing
 
-char			**ft_read_map_to_strs(const int map_fd);
-t_map_element	**ft_get_map(char	*file_path);
+char			**ft_read_map_to_strs(
+					const int map_fd
+					);
+
+char			***ft_map_strs_to_split(
+					char **map_strs
+					);
+
+t_map_element	**ft_alloc_map_elems_from_3d_array(
+					char ***map_strs_elements
+					);
+
+t_map_element	**ft_parse_2d_map_element_from_strs(
+					char ***map_strs_elements,
+					t_map_element **map_elements
+					);
+
+t_map_element	**ft_get_map(
+					char *file_path
+					);
 
 #endif
