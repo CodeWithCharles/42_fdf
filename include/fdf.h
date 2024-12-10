@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 16:57:21 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:49:32 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ extern char	*g_pname;
 # define ERROR_PARSING_MAP			"%s%s:\tError while parsing map.\n%s"
 # define ERROR_INIT_MLX				"%s%s:\tError initializing mlx.\n%s"
 # define ERROR_CREATING_WINDOW		"%s%s:\tError creating new mlx window.\n%s"
-
+# define ERROR_CREATING_IMAGE		"%s%s:\tError creating mlx image.\n%s"
 // Utils define
 
 # ifndef DEBUG_MODE
@@ -149,12 +149,24 @@ typedef struct s_camera
 	double		fov;
 }	t_camera;
 
+// Image data
+
+typedef struct s_img_data
+{
+	void	*img;
+	char	*img_pixels_ptr;
+	int		bits_per_pixel;
+	int		endianess;
+	int		line_len;
+}	t_img_data;
+
 // Mlx data
 
 typedef struct s_mlx_data
 {
-	void	*mlx;
-	void	*window;
+	void		*mlx;
+	void		*window;
+	t_img_data	img_data;
 }	t_mlx_data;
 
 // Fdf
@@ -289,8 +301,17 @@ void			ft_start_hook(
 					t_fdf *fdf
 					);
 
-int				ft_refresh_loop(
+void			ft_refresh_image(
 					t_fdf *fdf
+					);
+
+// Drawing
+
+void			ft_put_pixel(
+					t_img_data *img,
+					int x,
+					int y,
+					int color
 					);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:22:08 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 17:01:43 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:40:35 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,16 @@ int	ft_init_fdf(
 	if (!fdf->mlx_data.mlx)
 		return (print_gen_error(ERROR_INIT_MLX), RET_ERR);
 	fdf->mlx_data.window = mlx_new_window(
-			fdf->mlx_data.mlx, HEIGHT, WIDTH, "Fil de Fer");
+			fdf->mlx_data.mlx, WIDTH, HEIGHT, "Fil de Fer");
 	if (!fdf->mlx_data.window)
 		return (print_gen_error(ERROR_CREATING_WINDOW), RET_ERR);
+	fdf->mlx_data.img_data.img = mlx_new_image(
+			fdf->mlx_data.mlx, WIDTH, HEIGHT);
+	if (!fdf->mlx_data.img_data.img)
+		return (print_gen_error(ERROR_CREATING_IMAGE), RET_ERR);
+	fdf->mlx_data.img_data.img_pixels_ptr = mlx_get_data_addr(
+			fdf->mlx_data.img_data.img, &fdf->mlx_data.img_data.bits_per_pixel,
+			&fdf->mlx_data.img_data.line_len,
+			&fdf->mlx_data.img_data.endianess);
 	return (RET_OK);
 }

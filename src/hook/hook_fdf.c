@@ -6,19 +6,11 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:01:03 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 16:55:42 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:48:59 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	ft_print_debug_cam(t_fdf *fdf)
-{
-	printf("Camera :\n\t- x_deg : %lf\n\t- y_deg : %lf"\
-	"\n\t- fov : %lf\n\tOffset :\n\t\t- x : %d\n\t\t- y : %d\nScale : %lf\n",
-		fdf->camera.x_deg, fdf->camera.y_deg, fdf->camera.fov,
-		fdf->camera.offset.x, fdf->camera.offset.y, fdf->scale);
-}
 
 int	ft_hook(
 	int keysym,
@@ -33,7 +25,7 @@ int	ft_hook(
 		exit(0);
 	}
 	ft_hook_update_camera(keysym, fdf);
-	ft_print_debug_cam(fdf);
+	ft_refresh_image(fdf);
 	return (0);
 }
 
@@ -68,10 +60,13 @@ void	ft_hook_update_camera(
 			fdf->scale += FDF_SCALE_INCREMENT;
 }
 
-int	ft_refresh_loop(t_fdf *fdf)
+void	ft_refresh_image(t_fdf *fdf)
 {
-	(void)fdf;
-	return (0);
+	for (int y = 0; y < HEIGHT; ++y)
+		for (int x = 0; x < WIDTH; ++x)
+			ft_put_pixel(&fdf->mlx_data.img_data, x, y, 0xff);
+	mlx_put_image_to_window(fdf->mlx_data.mlx, fdf->mlx_data.window,
+		fdf->mlx_data.img_data.img, 0, 0);
 }
 
 int	ft_mouse_hook(
@@ -87,6 +82,5 @@ int	ft_mouse_hook(
 		fdf->camera.fov += .1;
 	else if (keysym == MOUSE_SCROLL_DOWN)
 		fdf->camera.fov -= .1;
-	ft_print_debug_cam(fdf);
 	return (0);
 }
