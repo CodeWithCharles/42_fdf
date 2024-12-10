@@ -6,14 +6,14 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:42:44 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 12:12:19 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:41:49 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 size_t	ft_len_2d_array(
-	const char **array
+	char **array
 )
 {
 	size_t	i;
@@ -27,7 +27,7 @@ size_t	ft_len_2d_array(
 }
 
 size_t	ft_len_3d_array(
-	const char ***array
+	char ***array
 )
 {
 	size_t	i;
@@ -65,7 +65,7 @@ void	ft_free_3d_array(
 	i = 0;
 	while ((*array)[i])
 	{
-		ft_free_2d_array((*array)[i]);
+		ft_free_2d_array(&(*array)[i]);
 		(*array)[i++] = NULL;
 	}
 	free(*array);

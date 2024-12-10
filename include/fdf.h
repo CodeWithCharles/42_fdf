@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 12:20:26 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:41:11 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct s_map_element
 	int			z;
 	int			original_depth;
 	uint32_t	color;
+	int			is_end;
 }	t_map_element;
 
 // Offset
@@ -179,11 +180,11 @@ int				ft_init_fdf(
 // Array utils
 
 size_t			ft_len_2d_array(
-					const char **array
+					char **array
 					);
 
 size_t			ft_len_3d_array(
-					const char ***array
+					char ***array
 					);
 
 void			ft_free_2d_array(

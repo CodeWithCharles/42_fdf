@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:39:19 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 12:11:50 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:39:33 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_map_element	**ft_alloc_map_elems_from_3d_array(
 			return (ft_free_3d_array(&map_strs_elements),
 				ft_free_2d_map_elements(&map_elements), NULL);
 	}
-	return ();
+	return (ft_parse_2d_map_element_from_strs(map_strs_elements, map_elements));
 }
 
 t_map_element	**ft_parse_2d_map_element_from_strs(
@@ -97,7 +97,31 @@ t_map_element	**ft_parse_2d_map_element_from_strs(
 	t_map_element **map_elements
 )
 {
+	size_t	i;
+	size_t	j;
+	char	**splitted_element;
 
+	if (!map_elements)
+		return (ft_free_3d_array(&map_strs_elements), NULL);
+	i = 0;
+	while (map_strs_elements[i])
+	{
+		j = 0;
+		while (map_strs_elements[i][j])
+		{
+			splitted_element = ft_split(map_strs_elements[i][j], ',');
+			if (!splitted_element)
+				return (ft_free_3d_array(&map_strs_elements),
+					ft_free_2d_map_elements(&map_elements), NULL);
+			map_elements[i][j] = (t_map_element){j, i, ft_atoi(splitted_element[0]),
+							ft_atoi(splitted_element[0]), get_color_from_str(splitted_element[1]), 0};
+			ft_free_2d_array(&splitted_element);
+			j++;
+		}
+		map_elements[i][j] = (t_map_element){0, 0, 0, 0, 0, 1};
+		i++;
+	}
+	return (ft_free_3d_array(&map_strs_elements), map_elements);
 }
 
 t_map_element	**ft_get_map(
