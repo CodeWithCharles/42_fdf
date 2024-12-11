@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:52:25 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/11 16:30:20 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/11 16:40:14 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ t_3d_matrix	ft_get_matrix_z(
 )
 {
 	return ((t_3d_matrix){
-		(t_3d_vector){cos(rad(deg)), -sin(rad(deg)), 0, 0},
-		(t_3d_vector){sin(rad(deg)), cos(rad(deg)), 0, 0},
+		(t_3d_vector){cos(ft_rad(deg)), -sin(ft_rad(deg)), 0, 0},
+		(t_3d_vector){sin(ft_rad(deg)), cos(ft_rad(deg)), 0, 0},
 		(t_3d_vector){0, 0, 1, 0}
 	});
 }

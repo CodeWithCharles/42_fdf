@@ -6,9 +6,11 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:21:45 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/11 16:26:49 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/11 16:41:02 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "fdf.h"
 
 t_3d_vector	ft_scale_3d_vector(
 	t_3d_vector vector,
@@ -32,7 +34,7 @@ double	ft_get_scale(
 
 	width = abs(map_borders.max.x - map_borders.min.x);
 	height = abs(map_borders.max.y - map_borders.min.y);
-	return (ft_min(
+	return (min(
 			(WIDTH - WIDTH / 8.0) / width,
 			(HEIGHT - HEIGHT / 8.0) / height)
 	);

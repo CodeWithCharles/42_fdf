@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:01:03 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 17:57:34 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:43:10 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_hook(
 )
 {
 	if (keysym == XK_1)
-		fdf->projection_mode = PROJ_MODE_ORTHO;
+		fdf->projection_mode = PROJ_MODE_ISO;
 	else if (keysym == XK_2)
 		fdf->projection_mode = PROJ_MODE_PARALLEL;
 	else if (keysym == XK_3)
@@ -32,6 +32,7 @@ int	ft_hook(
 	}
 	else
 		ft_hook_update_camera(keysym, fdf);
+	ft_clear_screen(fdf);
 	ft_refresh_image(fdf);
 	printf("Projection mode : %c\n", fdf->projection_mode);
 	return (0);

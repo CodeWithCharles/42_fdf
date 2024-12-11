@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 16:11:19 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/11 17:35:46 by cpoulain         ###   ########.fr       */
+/*   Created: 2024/12/11 17:39:39 by cpoulain          #+#    #+#             */
+/*   Updated: 2024/12/11 17:51:41 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-char	*g_pname;
-
-int	main(
-	int argc,
-	char **argv
+void	ft_clear_screen(
+	t_fdf *fdf
 )
 {
-	t_fdf	fdf;
+	int	y;
+	int	x;
 
-	fdf = (t_fdf){};
-	fdf.projection_mode = PROJ_MODE_ISO;
-	g_pname = argv[0];
-	if (ft_init_fdf(argc, argv, &fdf) != RET_OK)
-		return (free_fdf(&fdf), RET_ERR);
-	ft_start_hook(&fdf);
-	mlx_loop(fdf.mlx_data.mlx);
-	free_fdf(&fdf);
-	return (RET_OK);
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			ft_put_pixel(&fdf->mlx_data.img_data, x, y, 0);
+			x++;
+		}
+		y++;
+	}
 }

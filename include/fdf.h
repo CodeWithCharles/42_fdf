@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/11 16:31:57 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:47:49 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 
 // Global vars
 
-extern char	*g_pname;
+extern char			*g_pname;
 
 // Errors
 
@@ -76,7 +76,7 @@ extern char	*g_pname;
 #  define FILE_EXT					".fdf"
 # endif
 
-# define PROJ_MODE_ORTHO			'O'
+# define PROJ_MODE_ISO				'I'
 # define PROJ_MODE_PARALLEL			'P'
 # define PROJ_MODE_ANGULAR			'A'
 
@@ -193,6 +193,10 @@ typedef struct s_fdf
 	t_mlx_data		mlx_data;
 	char			projection_mode;
 }	t_fdf;
+
+// Projections
+
+typedef t_3d_vector	(*t_ft_proj)(t_3d_vector *, t_fdf *);
 
 // Functions
 
@@ -376,6 +380,42 @@ void			ft_put_pixel(
 					int x,
 					int y,
 					int color
+					);
+
+void			ft_clear_screen(
+					t_fdf *fdf
+					);
+
+void			ft_draw(
+					t_fdf *fdf,
+					t_3d_vector (*t_ft_proj)(t_3d_vector vector, t_fdf *fdf)
+					);
+
+// Projection
+
+void			ft_project_and_draw(
+					t_fdf *fdf
+					);
+
+// Orthographic
+
+t_3d_vector		ft_to_iso(
+					t_3d_vector vector,
+					t_fdf *fdf
+					);
+
+// Angular
+
+t_3d_vector		ft_to_angular(
+					t_3d_vector vector,
+					t_fdf *fdf
+					);
+
+// Parallel
+
+t_3d_vector		ft_to_parallel(
+					t_3d_vector vector,
+					t_fdf *fdf
 					);
 
 #endif

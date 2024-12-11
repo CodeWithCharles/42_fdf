@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:23:12 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/11 16:01:47 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/11 16:42:05 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_3d_vector	ft_multiply_vector_by_matrix(
 {
 	double	*lv;
 
-	lv = (double)[3]{v.x, v.y, v.z};
+	lv = (double [3]){v.x, v.y, v.z};
 	v.x = lv[0] * m.i.x + lv[1] * m.i.y + lv[2] * m.i.z;
 	v.y = lv[0] * m.j.x + lv[1] * m.j.x + lv[2] * m.j.z;
 	v.z = lv[0] * m.k.x + lv[1] * m.k.x + lv[2] * m.k.z;
