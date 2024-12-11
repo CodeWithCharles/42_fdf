@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 17:58:29 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/11 16:31:57 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "mlx.h"
 # include <X11/keysym.h>
 # include <fcntl.h>
+# include <math.h>
 
 # define BUFFER_SIZE				10
 
@@ -114,6 +115,15 @@ typedef struct s_color
 	uint32_t	a;
 }	t_color;
 
+// Matrix
+
+typedef struct s_3d_matrix
+{
+	t_3d_vector	i;
+	t_3d_vector	j;
+	t_3d_vector	k;
+}	t_3d_matrix;
+
 // Map Borders
 
 typedef struct s_map_borders
@@ -199,6 +209,12 @@ void			print_arged_error(
 
 void			print_mlx_error(void);
 
+// Math utils
+
+double			ft_rad(
+					double deg
+					);
+
 // Color functions
 
 uint32_t		get_color_from_str(
@@ -252,6 +268,49 @@ void			ft_free_2d_map_elements(
 
 void			free_fdf(
 					t_fdf	*fdf
+					);
+
+// Vector
+
+t_3d_vector		ft_get_3d_vector(
+					t_map_element element
+					);
+
+t_3d_vector		ft_multiply_vector_by_matrix(
+					t_3d_vector v,
+					t_3d_matrix m
+					);
+
+// Scaling
+
+t_3d_vector		ft_scale_3d_vector(
+					t_3d_vector vector,
+					double scale
+					);
+
+double			ft_get_scale(
+					t_map_borders	map_borders
+					);
+
+// Matrix
+
+t_3d_matrix		ft_get_matrix_x(
+					double deg
+					);
+
+t_3d_matrix		ft_get_matrix_y(
+					double deg
+					);
+
+t_3d_matrix		ft_get_matrix_y(
+					double deg
+					);
+
+t_3d_matrix		ft_get_matrix_i(void);
+
+t_3d_matrix		ft_get_rot_matrix(
+					double deg,
+					char axis
 					);
 
 // File handling
