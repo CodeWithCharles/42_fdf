@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/12 13:39:29 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:46:42 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -425,7 +425,7 @@ int				ft_mouse_hook(
 					t_fdf *fdf
 					);
 
-int				ft_loop_hook(
+void			ft_proj(
 					t_fdf *fdf
 					);
 

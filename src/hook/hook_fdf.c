@@ -6,11 +6,16 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:01:03 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/12 13:41:13 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:15:05 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	ft_print_debug(t_fdf *fdf)
+{
+	printf("DEBUG INFOS\n\n\tCamera :\n\t\tOffset :\n\t\t\tx : %d\n\t\t\ty : %d\n\t\tz_deg : %lf\n\t\tx_deg : %lf\n\t\ty_deg : %lf\n\t\tfov : %lf\n\tProjection mode : %c\n\tScale : %lf\n\n", fdf->camera.offset.x, fdf->camera.offset.y, fdf->camera.z_deg, fdf->camera.x_deg, fdf->camera.y_deg, fdf->camera.fov, fdf->projection_mode, fdf->scale);
+}
 
 int	ft_hook(
 	int keysym,
@@ -32,6 +37,10 @@ int	ft_hook(
 	}
 	else
 		ft_hook_update_camera(keysym, fdf);
+	ft_print_debug(fdf);
+	ft_clear_screen(fdf);
+	ft_project_and_draw(fdf, fdf->projection_mode);
+	ft_refresh_image(fdf);
 	return (0);
 }
 
@@ -85,16 +94,6 @@ int	ft_mouse_hook(
 		fdf->camera.fov += .1;
 	else if (keysym == MOUSE_SCROLL_DOWN)
 		fdf->camera.fov -= .1;
-	return (0);
-}
-
-int	ft_loop_hook(t_fdf *fdf)
-{
-	ft_clear_screen(fdf);
-	if (fdf->projection_mode == PROJ_MODE_ANGULAR
-		|| fdf->projection_mode == PROJ_MODE_PARALLEL)
-		ft_project_and_draw(fdf, fdf->projection_mode);
-	ft_project_and_draw(fdf, PROJ_MODE_ISO);
-	ft_refresh_image(fdf);
+	ft_print_debug(fdf);
 	return (0);
 }
