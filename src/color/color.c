@@ -6,14 +6,14 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:13:44 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 14:20:31 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:31:06 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
 
-uint32_t	get_color_from_str(
+uint32_t	ft_get_color_from_str(
 	char *str
 )
 {
@@ -21,15 +21,15 @@ uint32_t	get_color_from_str(
 
 	if (str && str + 2)
 	{
-		color = rgba_to_color(ft_atoi_base(str + 2, 16));
+		color = ft_rgba_to_color(ft_atoi_base(str + 2, 16));
 		if (ft_strlen(str + 2) > 0 && ft_strlen(str + 2) < 7)
 			color.a = 0xFF;
-		return (rgba_to_uint32_t(color.r, color.g, color.b, color.a));
+		return (ft_rgba_to_uint32_t(color.r, color.g, color.b, color.a));
 	}
-	return (rgba_to_uint32_t(0xFF, 0xFF, 0xFF, 0xFF));
+	return (ft_rgba_to_uint32_t(0xFF, 0xFF, 0xFF, 0xFF));
 }
 
-uint32_t	rgba_to_uint32_t(
+uint32_t	ft_rgba_to_uint32_t(
 	int r,
 	int g,
 	int b,
@@ -41,7 +41,7 @@ uint32_t	rgba_to_uint32_t(
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-t_color	rgba_to_color(
+t_color	ft_rgba_to_color(
 	uint32_t rgba
 )
 {

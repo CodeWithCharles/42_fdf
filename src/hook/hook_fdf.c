@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:01:03 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/11 17:43:10 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:41:13 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ int	ft_hook(
 	}
 	else
 		ft_hook_update_camera(keysym, fdf);
-	ft_clear_screen(fdf);
-	ft_refresh_image(fdf);
-	printf("Projection mode : %c\n", fdf->projection_mode);
 	return (0);
 }
 
@@ -88,5 +85,16 @@ int	ft_mouse_hook(
 		fdf->camera.fov += .1;
 	else if (keysym == MOUSE_SCROLL_DOWN)
 		fdf->camera.fov -= .1;
+	return (0);
+}
+
+int	ft_loop_hook(t_fdf *fdf)
+{
+	ft_clear_screen(fdf);
+	if (fdf->projection_mode == PROJ_MODE_ANGULAR
+		|| fdf->projection_mode == PROJ_MODE_PARALLEL)
+		ft_project_and_draw(fdf, fdf->projection_mode);
+	ft_project_and_draw(fdf, PROJ_MODE_ISO);
+	ft_refresh_image(fdf);
 	return (0);
 }

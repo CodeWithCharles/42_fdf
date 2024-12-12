@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/11 17:47:49 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:39:29 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,16 @@ typedef struct s_3d_matrix
 	t_3d_vector	k;
 }	t_3d_matrix;
 
+// Plotter (for plot_line readability)
+
+typedef struct s_plotter
+{
+	int	dx;
+	int	dy;
+	int	yi;
+	int	d;
+}	t_plotter;
+
 // Map Borders
 
 typedef struct s_map_borders
@@ -196,7 +206,7 @@ typedef struct s_fdf
 
 // Projections
 
-typedef t_3d_vector	(*t_ft_proj)(t_3d_vector *, t_fdf *);
+typedef t_3d_vector	(*t_ft_proj)(t_3d_vector vector, t_fdf *fdf);
 
 // Functions
 
@@ -219,21 +229,41 @@ double			ft_rad(
 					double deg
 					);
 
+double			ft_calculate_relative_position(
+					t_3d_vector start_point,
+					t_3d_vector end_point,
+					t_3d_vector current_point
+					);
+
 // Color functions
 
-uint32_t		get_color_from_str(
+uint32_t		ft_get_color_from_str(
 					char *str
 					);
 
-uint32_t		rgba_to_uint32_t(
+uint32_t		ft_rgba_to_uint32_t(
 					int r,
 					int g,
 					int b,
 					int a
 					);
 
-t_color			rgba_to_color(
+t_color			ft_rgba_to_color(
 					uint32_t rgba
+					);
+
+// Gradients
+
+uint32_t		ft_grad_pt_color(
+					uint32_t a,
+					uint32_t b,
+					double position
+					);
+
+uint32_t		ft_get_grad(
+					t_3d_vector start,
+					t_3d_vector end,
+					t_3d_vector current
 					);
 
 // Initializing
@@ -262,6 +292,13 @@ void			ft_free_3d_array(
 					char ****array
 					);
 
+// Map borders
+
+t_map_borders	ft_get_map_borders(
+					double s,
+					t_fdf *fdf
+					);
+
 // Map elements utils
 
 void			ft_free_2d_map_elements(
@@ -285,6 +322,23 @@ t_3d_vector		ft_multiply_vector_by_matrix(
 					t_3d_matrix m
 					);
 
+t_3d_vector		ft_scale_and_offset(
+					t_3d_vector vector,
+					t_fdf *fdf,
+					t_3d_vector (*t_ft_proj)(t_3d_vector vector, t_fdf *fdf)
+					);
+
+t_3d_vector		ft_scale(
+					t_3d_vector vector,
+					double scale
+					);
+
+t_3d_vector		ft_offset(
+					t_3d_vector vector,
+					t_fdf *fdf,
+					t_3d_vector (*t_ft_proj)(t_3d_vector vector, t_fdf *fdf)
+					);
+
 // Scaling
 
 t_3d_vector		ft_scale_3d_vector(
@@ -294,6 +348,12 @@ t_3d_vector		ft_scale_3d_vector(
 
 double			ft_get_scale(
 					t_map_borders	map_borders
+					);
+
+// Offset
+
+t_offset		ft_get_offset(
+					t_map_borders map_borders
 					);
 
 // Matrix
@@ -365,6 +425,10 @@ int				ft_mouse_hook(
 					t_fdf *fdf
 					);
 
+int				ft_loop_hook(
+					t_fdf *fdf
+					);
+
 void			ft_start_hook(
 					t_fdf *fdf
 					);
@@ -391,10 +455,23 @@ void			ft_draw(
 					t_3d_vector (*t_ft_proj)(t_3d_vector vector, t_fdf *fdf)
 					);
 
+void			ft_prepare_points_for_plot(
+					t_3d_vector *p0,
+					t_3d_vector *p1,
+					int			*is_steep
+					);
+
+void			ft_plot_line(
+					t_3d_vector p0,
+					t_3d_vector p1,
+					t_img_data	*img_data
+					);
+
 // Projection
 
 void			ft_project_and_draw(
-					t_fdf *fdf
+					t_fdf *fdf,
+					char proj_mode
 					);
 
 // Orthographic

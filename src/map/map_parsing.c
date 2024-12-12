@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:39:19 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/10 13:43:36 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:13:02 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ t_map_element	**ft_parse_2d_map_element_from_strs(
 					ft_free_2d_map_elements(&map_elements), NULL);
 			map_elements[i][j] = (t_map_element){j, i,
 				ft_atoi(splitted_element[0]), ft_atoi(splitted_element[0]),
-				get_color_from_str(splitted_element[1]), 0};
+				ft_get_color_from_str(splitted_element[1]), 0};
 			ft_free_2d_array(&splitted_element);
 			j++;
 		}
