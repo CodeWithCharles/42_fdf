@@ -6,7 +6,7 @@
 #    By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 16:33:26 by cpoulain          #+#    #+#              #
-#    Updated: 2024/12/11 16:43:24 by cpoulain         ###   ########.fr        #
+#    Updated: 2024/12/17 16:56:12 by cpoulain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ THDPTY_MLX_H	:=	$(INC_DIR)/$(MLX_INC_H)
 # Compiler
 
 CC				:=	cc
-CFLAGS			:=	-Wall -Wextra -Werror -g
+CFLAGS			:=	-Wall -Wextra -Werror -Ofast -g
 LIBFLAGS		:=	-L/usr/lib -lX11 -lXext -lXrandr -lXi -lXinerama -lXcursor -lm
 # Files definition
 

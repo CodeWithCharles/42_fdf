@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:36:23 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/12 14:16:55 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/17 14:57:57 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	ft_project_and_draw(
 {
 	void	*t_ft_proj;
 
+	ft_clear_screen(fdf);
 	if (proj_mode == PROJ_MODE_ISO)
 	{
 		t_ft_proj = ft_to_iso;

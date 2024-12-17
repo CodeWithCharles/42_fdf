@@ -6,16 +6,11 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:01:03 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/12 14:15:05 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:15:13 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static void	ft_print_debug(t_fdf *fdf)
-{
-	printf("DEBUG INFOS\n\n\tCamera :\n\t\tOffset :\n\t\t\tx : %d\n\t\t\ty : %d\n\t\tz_deg : %lf\n\t\tx_deg : %lf\n\t\ty_deg : %lf\n\t\tfov : %lf\n\tProjection mode : %c\n\tScale : %lf\n\n", fdf->camera.offset.x, fdf->camera.offset.y, fdf->camera.z_deg, fdf->camera.x_deg, fdf->camera.y_deg, fdf->camera.fov, fdf->projection_mode, fdf->scale);
-}
 
 int	ft_hook(
 	int keysym,
@@ -37,8 +32,6 @@ int	ft_hook(
 	}
 	else
 		ft_hook_update_camera(keysym, fdf);
-	ft_print_debug(fdf);
-	ft_clear_screen(fdf);
 	ft_project_and_draw(fdf, fdf->projection_mode);
 	ft_refresh_image(fdf);
 	return (0);
@@ -49,13 +42,13 @@ void	ft_hook_update_camera(
 	t_fdf *fdf
 )
 {
-	if (keysym == XK_W || keysym == XK_w)
+	if (keysym == XK_W || keysym == XK_s)
 		fdf->camera.offset.y -= fdf->scale;
-	else if (keysym == XK_S || keysym == XK_s)
+	else if (keysym == XK_S || keysym == XK_a)
 		fdf->camera.offset.x += fdf->scale;
-	else if (keysym == XK_A || keysym == XK_a)
+	else if (keysym == XK_A || keysym == XK_d)
 		fdf->camera.offset.x -= fdf->scale;
-	else if (keysym == XK_D || keysym == XK_d)
+	else if (keysym == XK_D || keysym == XK_w)
 		fdf->camera.offset.y += fdf->scale;
 	else if (keysym == XK_Right)
 		fdf->camera.y_deg += CAM_DEG_INCREMENT;
@@ -94,6 +87,7 @@ int	ft_mouse_hook(
 		fdf->camera.fov += .1;
 	else if (keysym == MOUSE_SCROLL_DOWN)
 		fdf->camera.fov -= .1;
-	ft_print_debug(fdf);
+	ft_project_and_draw(fdf, fdf->projection_mode);
+	ft_refresh_image(fdf);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/12 13:46:42 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/17 14:22:50 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_plotter
 	int	dx;
 	int	dy;
 	int	yi;
+	int	xi;
 	int	d;
 }	t_plotter;
 
@@ -455,10 +456,16 @@ void			ft_draw(
 					t_3d_vector (*t_ft_proj)(t_3d_vector vector, t_fdf *fdf)
 					);
 
-void			ft_prepare_points_for_plot(
-					t_3d_vector *p0,
-					t_3d_vector *p1,
-					int			*is_steep
+void			ft_plot_line_low(
+					t_3d_vector	p0,
+					t_3d_vector	p1,
+					t_img_data	*img_data
+					);
+
+void			ft_plot_line_high(
+					t_3d_vector p0,
+					t_3d_vector p1,
+					t_img_data	*img_data
 					);
 
 void			ft_plot_line(
