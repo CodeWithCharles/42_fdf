@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/17 14:22:50 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:33:32 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ extern char			*g_pname;
 # define FDF_SCALE_INCREMENT		1
 # define CAM_DEG_INCREMENT			.01
 
+// Mouse control
+
+# define MOUSE_OFFSET_DIVISION		32
+# define MOUSE_ROT_DIVISION			2
+
 # ifndef ENDIANESS
 #  define ENDIANESS					0
 # endif
@@ -82,6 +87,8 @@ extern char			*g_pname;
 
 // Mouse control for hooks
 
+# define MOUSE_LEFT_CLICK			1
+# define MOUSE_RIGHT_CLICK			3
 # define MOUSE_SCROLL_UP			4
 # define MOUSE_SCROLL_DOWN			5
 
@@ -123,6 +130,18 @@ typedef struct s_3d_matrix
 	t_3d_vector	j;
 	t_3d_vector	k;
 }	t_3d_matrix;
+
+// Mouse
+
+typedef struct s_mouse
+{
+	double	prev_x;
+	double	prev_y;
+	double	x;
+	double	y;
+	int		left_pressed;
+	int		right_pressed;
+}	t_mouse;
 
 // Plotter (for plot_line readability)
 
@@ -200,6 +219,7 @@ typedef struct s_fdf
 {
 	t_map_element	**map;
 	double			scale;
+	t_mouse			mouse;
 	t_camera		camera;
 	t_mlx_data		mlx_data;
 	char			projection_mode;
@@ -419,8 +439,21 @@ void			ft_hook_update_camera(
 					t_fdf *fdf
 					);
 
-int				ft_mouse_hook(
-					int keysym,
+int				ft_mouse_pressed_hook(
+					int button,
+					int x,
+					int y,
+					t_fdf *fdf
+					);
+
+int				ft_mouse_released_hook(
+					int button,
+					int x,
+					int y,
+					t_fdf *fdf
+					);
+
+int				ft_mouse_moved_hook(
 					int x,
 					int y,
 					t_fdf *fdf
@@ -435,6 +468,26 @@ void			ft_start_hook(
 					);
 
 void			ft_refresh_image(
+					t_fdf *fdf
+					);
+
+// Mouse utils
+
+void			ft_rotate_mouse(
+					int x,
+					int y,
+					t_fdf *fdf
+					);
+
+void			ft_rotate_mouse(
+					int x,
+					int y,
+					t_fdf *fdf
+					);
+
+void			ft_translate_mouse(
+					int x,
+					int y,
 					t_fdf *fdf
 					);
 

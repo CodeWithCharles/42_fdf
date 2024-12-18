@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:01:03 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/17 17:56:00 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:41:09 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,4 @@ void	ft_refresh_image(t_fdf *fdf)
 {
 	mlx_put_image_to_window(fdf->mlx_data.mlx, fdf->mlx_data.window,
 		fdf->mlx_data.img_data.img, 0, 0);
-}
-
-int	ft_mouse_hook(
-	int keysym,
-	int x,
-	int y,
-	t_fdf *fdf
-)
-{
-	(void)x;
-	(void)y;
-	if (keysym == MOUSE_SCROLL_UP)
-		fdf->camera.fov += .1;
-	else if (keysym == MOUSE_SCROLL_DOWN)
-		fdf->camera.fov -= .1;
-	ft_project_and_draw(fdf, fdf->projection_mode);
-	ft_refresh_image(fdf);
-	return (0);
 }
