@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 18:03:09 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/18 18:34:08 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:55:01 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_rotate_mouse(
 	t_fdf *fdf
 )
 {
-	fdf->camera.y_deg -= (fdf->mouse.prev_x - x)
+	fdf->camera.y_deg += (fdf->mouse.prev_x - x)
 		* CAM_DEG_INCREMENT / MOUSE_ROT_DIVISION;
 	fdf->camera.x_deg += (fdf->mouse.prev_y - y)
 		* CAM_DEG_INCREMENT / MOUSE_ROT_DIVISION;
