@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/20 12:49:29 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/20 13:13:44 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -898,6 +898,10 @@ int				ft_mouse_released_hook(
 int				ft_mouse_moved_hook(
 					int x,
 					int y,
+					t_fdf *fdf
+					);
+
+int				ft_close_window_hook(
 					t_fdf *fdf
 					);
 

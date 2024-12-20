@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:01:03 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/20 12:34:04 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/20 13:13:31 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	ft_hook(
 		fdf->projection_mode = PROJ_MODE_ANGULAR;
 	else if (keysym == XK_Escape)
 	{
-		ft_printf("%s%s:\tThe %d key (ESC) has been pressed.\n%s",
-			TERM_RED, g_pname, keysym, TERM_RESET);
 		free_fdf(fdf);
 		exit(0);
 	}
@@ -83,4 +81,10 @@ void	ft_refresh_image(t_fdf *fdf)
 	mlx_put_image_to_window(fdf->mlx_data.mlx, fdf->mlx_data.window,
 		fdf->mlx_data.img_data.img, 0, 0);
 	ft_info(fdf);
+}
+
+int	ft_close_window_hook(t_fdf *fdf)
+{
+	free_fdf(fdf);
+	exit(0);
 }
