@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:10:53 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/18 18:33:32 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:43:09 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ extern char			*g_pname;
 # define FDF_MAX_SCALE				1000
 # define FDF_SCALE_INCREMENT		1
 # define CAM_DEG_INCREMENT			.01
+
+# define INF_COLOR					0x00FFFFFF
 
 // Mouse control
 
@@ -243,6 +245,23 @@ void			print_arged_error(
 					);
 
 void			print_mlx_error(void);
+
+// Infos
+
+void			ft_mlx_string_put(
+					t_fdf *fdf,
+					t_2d_vector coor,
+					uint32_t color,
+					char *str
+					);
+
+void			ft_info_cam(
+					t_fdf *fdf
+					);
+
+void			ft_info(
+					t_fdf *fdf
+					);
 
 // Math utils
 
@@ -468,6 +487,11 @@ void			ft_start_hook(
 					);
 
 void			ft_refresh_image(
+					t_fdf *fdf
+					);
+
+void			ft_rotate_camera_hook(
+					int keysym,
 					t_fdf *fdf
 					);
 

@@ -6,7 +6,7 @@
 /*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:01:03 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/18 17:41:09 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:43:32 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,26 @@ void	ft_hook_update_camera(
 		fdf->camera.offset.x -= fdf->scale;
 	else if (keysym == XK_D || keysym == XK_w)
 		fdf->camera.offset.y += fdf->scale;
-	else if (keysym == XK_Right)
+	else if (keysym == XK_minus || keysym == XK_underscore)
+	{
+		if (fdf->scale > FDF_MIN_SCALE)
+			fdf->scale -= FDF_SCALE_INCREMENT;
+	}
+	else if (keysym == XK_plus || keysym == XK_equal)
+	{
+		if (fdf->scale < FDF_MAX_SCALE)
+			fdf->scale += FDF_SCALE_INCREMENT;
+	}
+	else
+		ft_rotate_camera_hook(keysym, fdf);
+}
+
+void	ft_rotate_camera_hook(
+	int keysym,
+	t_fdf *fdf
+)
+{
+	if (keysym == XK_Right)
 		fdf->camera.y_deg += CAM_DEG_INCREMENT;
 	else if (keysym == XK_Left)
 		fdf->camera.y_deg -= CAM_DEG_INCREMENT;
@@ -58,18 +77,16 @@ void	ft_hook_update_camera(
 		fdf->camera.x_deg += CAM_DEG_INCREMENT;
 	else if (keysym == XK_Down)
 		fdf->camera.x_deg -= CAM_DEG_INCREMENT;
-	else if (keysym == XK_minus || keysym == XK_underscore)
-	{
-		if (fdf->scale > FDF_MIN_SCALE)
-			fdf->scale -= FDF_SCALE_INCREMENT;
-	}
-	else if (keysym == XK_plus || keysym == XK_equal)
-		if (fdf->scale < FDF_MAX_SCALE)
-			fdf->scale += FDF_SCALE_INCREMENT;
+	else if (keysym == XK_e)
+		fdf->camera.z_deg += CAM_DEG_INCREMENT * 57.2958;
+	else if (keysym == XK_q)
+		fdf->camera.z_deg -= CAM_DEG_INCREMENT * 57.2958;
 }
 
 void	ft_refresh_image(t_fdf *fdf)
 {
+	ft_info(fdf);
 	mlx_put_image_to_window(fdf->mlx_data.mlx, fdf->mlx_data.window,
 		fdf->mlx_data.img_data.img, 0, 0);
+	ft_info(fdf);
 }
