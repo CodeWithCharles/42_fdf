@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: cpoulain <cpoulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:13:44 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/12 12:31:06 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:32:45 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ uint32_t	ft_get_color_from_str(
 {
 	t_color			color;
 
-	if (str && str + 2)
+	if (str && ft_strlen(str) > 2)
 	{
 		color = ft_rgba_to_color(ft_atoi_base(str + 2, 16));
 		if (ft_strlen(str + 2) > 0 && ft_strlen(str + 2) < 7)

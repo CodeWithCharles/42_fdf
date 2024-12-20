@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_hook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: cpoulain <cpoulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:41:11 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/18 18:29:47 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:34:21 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,15 @@ int	ft_mouse_pressed_hook(
 		return (0);
 	}
 	else if (button == MOUSE_SCROLL_UP)
-		fdf->camera.fov += .1;
+	{
+		if (fdf->scale < FDF_MAX_SCALE)
+			fdf->scale += FDF_SCALE_INCREMENT;
+	}
 	else if (button == MOUSE_SCROLL_DOWN)
-		fdf->camera.fov -= .1;
+	{
+		if (fdf->scale > FDF_MIN_SCALE)
+			fdf->scale -= FDF_SCALE_INCREMENT;
+	}
 	ft_project_and_draw(fdf, fdf->projection_mode);
 	ft_refresh_image(fdf);
 	return (0);

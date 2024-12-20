@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: cpoulain <cpoulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 18:03:09 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/20 10:55:01 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:34:43 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	ft_translate_mouse(
 	t_fdf *fdf
 )
 {
-	fdf->camera.offset.x += (fdf->mouse.prev_x - x) * fdf->scale
+	fdf->camera.offset.x -= (fdf->mouse.prev_x - x) * fdf->scale
 		/ MOUSE_OFFSET_DIVISION;
-	fdf->camera.offset.y += (fdf->mouse.prev_y - y) * fdf->scale
+	fdf->camera.offset.y -= (fdf->mouse.prev_y - y) * fdf->scale
 		/ MOUSE_OFFSET_DIVISION;
 }

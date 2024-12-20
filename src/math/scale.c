@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   scale.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: cpoulain <cpoulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:21:45 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/12 11:48:30 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:11:06 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-t_3d_vector	ft_scale_3d_vector(
-	t_3d_vector vector,
-	double scale
-)
-{
-	return ((t_3d_vector){
-		vector.x * scale,
-		vector.y * scale,
-		vector.z * scale,
-		vector.color
-	});
-}
 
 double	ft_get_scale(
 	t_map_borders	map_borders

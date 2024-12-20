@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_fdf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpoulain <cpoulain@student.42lehavre.fr>   +#+  +:+       +#+        */
+/*   By: cpoulain <cpoulain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:01:03 by cpoulain          #+#    #+#             */
-/*   Updated: 2024/12/20 10:43:32 by cpoulain         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:34:04 by cpoulain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,9 @@ void	ft_hook_update_camera(
 	else if (keysym == XK_D || keysym == XK_w)
 		fdf->camera.offset.y += fdf->scale;
 	else if (keysym == XK_minus || keysym == XK_underscore)
-	{
-		if (fdf->scale > FDF_MIN_SCALE)
-			fdf->scale -= FDF_SCALE_INCREMENT;
-	}
+		fdf->camera.fov += .1;
 	else if (keysym == XK_plus || keysym == XK_equal)
-	{
-		if (fdf->scale < FDF_MAX_SCALE)
-			fdf->scale += FDF_SCALE_INCREMENT;
-	}
+		fdf->camera.fov -= .1;
 	else
 		ft_rotate_camera_hook(keysym, fdf);
 }
